@@ -1,0 +1,138 @@
+\documentclass[11pt]{article}
+
+
+% \usepackage[sort]{natbib}
+\usepackage[style=verbose]{biblatex}
+\usepackage{fancyhdr}
+\usepackage{graphicx,caption,subcaption,color,float} %Graphics stuff
+\usepackage{hyperref,amssymb,amsmath, amsfonts, amsthm, enumerate, bm}
+\usepackage{placeins, cancel, wrapfig, xcolor, array, multirow, booktabs, algorithm, algpseudocode} 
+\usepackage[margin=0.9in]{geometry}
+\usepackage{ulem}
+\graphicspath{ {figs/} }
+\bibliography{references}
+
+% you may include other packages here (next line)
+\usepackage{enumitem}
+\usepackage{dirtytalk}
+
+%----- you must not change this -----------------
+\topmargin -1.0cm
+\textheight 23.0cm
+\parindent=0pt
+\parskip 1ex
+\renewcommand{\baselinestretch}{1.1}
+\pagestyle{fancy}
+\renewcommand{\theenumi}{\Alph{enumi}}
+\makeatletter
+\newcommand{\distas}[1]{\mathbin{\overset{#1}{\kern\z@\sim}}}%
+\newsavebox{\mybox}\newsavebox{\mysim}
+\newcommand{\distras}[1]{%
+  \savebox{\mybox}{\hbox{\kern3pt$\scriptstyle#1$\kern3pt}}%
+  \savebox{\mysim}{\hbox{$\sim$}}%
+  \mathbin{\overset{#1}{\kern\z@\resizebox{\wd\mybox}{\ht\mysim}{$\sim$}}}%
+}
+\makeatother
+%----------------------------------------------------
+
+% enter your details here----------------------------------
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+\setlength{\fboxrule}{4pt}\setlength{\fboxsep}{2ex}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+\title{Homework 1}
+\author{Jose Rebolledo Oyarce}
+
+
+
+\begin{document}
+
+\maketitle
+
+\textbf{Problem 1:}
+
+Katz centrality is defined as:
+
+\begin{equation*}
+    c_\textrm{Katz} = \beta (I - \alpha A)^{-1} \overrightarrow{1}
+\end{equation*}
+
+First, we need to be sure that $(I - \alpha A)$ is invertible. This matrix becomees singular when:
+
+\begin{equation*}
+    \textrm{det}(I - \alpha A) = 0
+\end{equation*}
+
+which it is equal to:
+
+\begin{equation*}
+    \textrm{det} \left( A - \frac{1}{\alpha} I \right) = 0
+\end{equation*}
+
+And this last expression is the definition of Eigendecomposition of a matrix. So we can say that the eigenvalues ($\lambda$) is equal to:
+
+\begin{equation*}
+    \lambda = \frac{1}{\alpha}  \longrightarrow \alpha = \frac{1}{\lambda}
+\end{equation*}
+
+So, to keep the matrix non-singular requires:
+
+\begin{equation*}
+    \alpha < \frac{1}{\lambda}
+\end{equation*}
+
+Now, the remain question is, which eigenvalue. And the answer is all of them, so we are going to pick the one that is most restrictive, i.e.:
+
+\begin{equation*}
+    \alpha < \frac{1}{\lambda_1 }
+\end{equation*}
+
+where $\lambda_1$ is the fist eigenvalue.
+
+\clearpage
+
+
+\textbf{Problem 2:}
+
+By definition we know that the number of walks of length $r$ from node $v_i$ to node $v_j$ is represented by:
+
+\begin{equation*}
+    N_{ij}^{(r)} = [A^r]_{ij}
+\end{equation*}
+
+But in the case of the number of common neighbors between two nodes ($v_i$ and $v_j$), we want the number of walks of length 2 between these two nodes because we want the intersection between the number of nodes around node $v_i$ and node $v_j$. So, using the definition of walk, the number of common neighbors between $v_i$ and $v_j$ is:
+
+\begin{equation*}
+    n_{ij} = \sum_{k=1}^{n} A_{ik} A_{kj} = [A^2]_{ij}
+\end{equation*}
+
+
+\clearpage
+
+\textbf{Problem 3:}
+
+\textbf{Part A}
+
+In the python code there are 2 functions: Get\_Neighbors and Get\_Jaccard\_Matrix.
+
+Get\_Neighbors receives the node what you want to identify its neighbors and a list of all edges inside of the graph. And return a list with the neighbors of that specific node.
+
+Get\_Jaccard\_Matrix receives the graph and using the list of neighbors of node i and node j, calculate the intersection and the union between the two list and finally calculate the matrix index. This function returns a list with the node i and j and its respective Jaccard matrix index.
+
+
+\textbf{Part B}
+
+By construction, Get\_Jaccard\_Matrix returns all possible combination, so we can identify when it comes to Ginori family values.
+
+\clearpage
+
+
+
+\end{document}
